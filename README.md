@@ -1,5 +1,9 @@
 # robidock
 
+[![Build Status](https://travis-ci.org/robisys/robidock.svg)](https://travis-ci.org/robisys/robidock)
+
+## Documentation
+
 This is a command line tool to help build, run, and test
 [web extensions](https://wiki.mozilla.org/WebExtensions).
 
@@ -12,4 +16,4 @@ Ultimately, it aims to support web extensions in a standard, portable,
 cross-platform way. Initially, it will provide a streamlined experience for developing
 [Firefox web extensions](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
 
-## Documentation
+
