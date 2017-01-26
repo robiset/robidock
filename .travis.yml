@@ -8,6 +8,7 @@ services:
    
 before_install:
 #- docker build -t robidock/myrunning .
+- docker run robidock/opensuse
 - docker ps -a
 - docker images
 
