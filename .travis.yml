@@ -3,24 +3,16 @@ sudo: required
 language: ruby
 
 services:
-- docker
+  - docker
 
-   
 before_install:
-#- docker build -t robidock/myrunning .
-- docker run robidock/opensuse
+- docker pull carlad/sinatra
+- docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
 - docker ps -a
-- docker images
+- docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
 
 script:
-- docker images 
-#robidock/myrunning
-
-after_success:
- - if [ "$TRAVIS_BRANCH" == "master" ]; then
-     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-   docker push robidock/myrunning;
-   fi
+- bundle exec rake test
 
 
 
