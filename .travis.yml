@@ -11,9 +11,15 @@ before_install:
 - docker ps -a
 - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
 
+# before_script
 script:
 - bundle exec rake test
+# -bundle exex rake build && bundle exec rake buildoc
 
+# after_script
+# after_success
+# after_failure
+#   $TRAVIS_TEST_RESULT
 
 
             
