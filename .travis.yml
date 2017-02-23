@@ -7,15 +7,4 @@ services:
 
 before_install:
 - docker run -dit -p 8082:80 --name runweb -v"$PWD":/usr/local/apache2/htdocs/ robidock/apache-web
-
-
-
-
-
-
-
-
-
-
-            
-        
+       
