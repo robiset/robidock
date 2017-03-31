@@ -1,16 +1,35 @@
-FROM node:5.11.0-slim
+## Dockerfile that generates an instance of http://bencane.com
 
-WORKDIR /app
+FROM nginx:latest
+MAINTAINER Benjamin Cane <ben@bencane.com>
 
-RUN npm install -g nodemon
-ADD package.json /app/package.json
-RUN npm config set registry http://registry.npmjs.org
-RUN npm install && npm ls
-RUN mv /app/node_modules /node_modules
+## NGINX custom config
+RUN mkdir -p /etc/nginx/globals && rm -vf /etc/nginx/sites-enabled/*
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/htmlglobal.conf /etc/nginx/globals/
+COPY nginx/bencane.com.conf /etc/nginx/sites-enabled/
 
-ADD . /app
-  
-ENV PORT 80
-EXPOSE 80
+## Install python and pip
+RUN apt-get update && apt-get install -y \
+    python-dev \
+    python-pip \
+    sysstat && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-CMD ["node", "server.js"]
+## Create a directory for required files
+RUN mkdir -p /build/
+
+## Add requirements file and run pip
+COPY requirements.txt /build/
+RUN pip install -r /build/requirements.txt
+
+## Add blog code nd required files
+COPY static /build/static
+COPY templates /build/templates
+COPY hamerkop.py /build/
+COPY config.yml /build/
+COPY articles /build/articles
+
+## Run Generator
+RUN /build/hamerkop.py -c /build/config.yml
