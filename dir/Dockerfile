@@ -1,5 +1,4 @@
-## Dockerfile that generates an instance of http://bencane.com
-
-FROM nginx:latest
-MAINTAINER Benjamin Cane <ben@bencane.com>
-
+FROM alpine:latest
+MAINTAINER robi
+RUN apk --update add bind-tools && rm -rf /var/cache/apk/*
+EXPOSE 80
