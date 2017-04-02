@@ -7,4 +7,6 @@ services:
 before_install:
 - docker run -dit -p 8082:80 --name runweb  robidock/robidock:latest sh
 
-       
+script:
+- docker ps  
+
