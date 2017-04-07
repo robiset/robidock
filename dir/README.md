@@ -1,2 +1,2 @@
 
-[![Build Status](https://travis-ci.org/robisys/robidock.svg)](https://hub.docker.com/r/robidock/robidock/)
+[![Build Status](https://hub.docker.com/r/robidock/robidock/)](https://hub.docker.com/r/robidock/robidock/)
